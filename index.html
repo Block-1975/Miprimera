@@ -1,51 +1,289 @@
+
+      
+    
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miprimerasupplyblock</title>
+    <title>Blockchain para Supply Chain</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración de color y fuente para Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#4F46E5', // Indigo 600
+                        'secondary': '#10B981', // Emerald 500
+                        'dark-bg': '#0F172A', // Slate 900
+                        'dark-card': '#1E293B', // Slate 800
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
     <style>
+        /* Estilos generales para el cuerpo y la presentación */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            text-align: center;
-            margin-top: 100px;
+            background-color: #0F172A; /* dark-bg */
+            font-family: 'Inter', sans-serif;
+            color: #E2E8F0; /* Slate 200 */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-
-        h1 {
-            color: #333;
+        .slide {
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
         }
-
-        button {
-            background-color: #24292e;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-
-        button:hover {
-            background-color: #444c56;
+        .hidden-slide {
+            opacity: 0;
+            transform: scale(0.95);
+            max-height: 0;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
         }
     </style>
 </head>
-<body>
-    <h1>Mi primera Supplyblock</h1>
-    <button onclick="simularLogin()">Iniciar sesión</button>
+<body class="p-4">
 
-    <p id="mensaje"></p>
+    <!-- Contenedor Principal de la Presentación -->
+    <div id="presentation-container" class="w-full max-w-4xl h-[80vh] bg-dark-card shadow-2xl rounded-2xl p-8 flex flex-col justify-between">
+        
+        <!-- Área de Diapositivas -->
+        <div id="slides-container" class="flex-grow overflow-auto p-2">
+            
+            <!-- Diapositiva 1: Título e Introducción -->
+            <section id="slide-1" class="slide space-y-6 flex flex-col justify-center h-full">
+                <h1 class="text-6xl font-extrabold text-primary mb-4">
+                    Blockchain: Revolucionando la Cadena de Suministro
+                </h1>
+                <p class="text-3xl text-secondary font-light">
+                    Construyendo Confianza y Transparencia en un Mundo Conectado
+                </p>
+                <div class="mt-8 text-lg text-slate-400">
+                    <p>Presentación para el desarrollo de proyectos de Supply Chain</p>
+                    <p class="font-medium mt-1">Nombre del Presentador</p>
+                </div>
+            </section>
 
+            <!-- Diapositiva 2: ¿Qué es Blockchain? -->
+            <section id="slide-2" class="slide hidden-slide space-y-6">
+                <h2 class="text-4xl font-bold text-secondary border-b border-secondary pb-2">
+                    1. Fundamentos de Blockchain
+                </h2>
+                
+                <div class="grid md:grid-cols-2 gap-6 text-lg">
+                    <div class="bg-dark-bg p-4 rounded-xl shadow-md space-y-3">
+                        <h3 class="text-2xl font-semibold text-primary">Libro Mayor Distribuido (DLT)</h3>
+                        <p>Una base de datos compartida e inmutable que se replica y sincroniza a través de una red de computadoras.</p>
+                    </div>
+                    <div class="bg-dark-bg p-4 rounded-xl shadow-md space-y-3">
+                        <h3 class="text-2xl font-semibold text-primary">Bloques y Cadenas</h3>
+                        <p>Los datos se agrupan en "bloques" que, una vez cerrados, se enlazan criptográficamente a la cadena anterior, asegurando la secuencia.</p>
+                    </div>
+                    <div class="bg-dark-bg p-4 rounded-xl shadow-md space-y-3 col-span-2">
+                        <h3 class="text-2xl font-semibold text-primary">Inmutabilidad y Transparencia</h3>
+                        <p>Cualquier dato registrado es permanente. Todos los participantes autorizados tienen acceso a la misma información, verificable y a prueba de manipulaciones.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Diapositiva 3: Problemas Clave en la Supply Chain Tradicional -->
+            <section id="slide-3" class="slide hidden-slide space-y-6">
+                <h2 class="text-4xl font-bold text-secondary border-b border-secondary pb-2">
+                    2. Retos de la Cadena de Suministro Actual
+                </h2>
+                <ul class="list-disc list-inside space-y-4 text-xl ml-4">
+                    <li class="font-medium text-red-400">
+                        Falta de Visibilidad: 
+                        <span class="text-slate-300 font-normal">Silos de información entre múltiples actores (proveedores, fabricantes, logística).</span>
+                    </li>
+                    <li class="font-medium text-red-400">
+                        Ineficiencia y Retrasos: 
+                        <span class="text-slate-300 font-normal">Procesos manuales, papeleo excesivo y reconciliación de datos lenta.</span>
+                    </li>
+                    <li class="font-medium text-red-400">
+                        Vulnerabilidad al Fraude: 
+                        <span class="text-slate-300 font-normal">Falsificación de productos y manipulación de registros de origen o calidad.</span>
+                    </li>
+                    <li class="font-medium text-red-400">
+                        Tiempos de Pago Largos: 
+                        <span class="text-slate-300 font-normal">Dependencia de verificaciones manuales para activar pagos.</span>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Diapositiva 4: Soluciones de Blockchain para Supply Chain -->
+            <section id="slide-4" class="slide hidden-slide space-y-6">
+                <h2 class="text-4xl font-bold text-secondary border-b border-secondary pb-2">
+                    3. La Propuesta de Valor de Blockchain
+                </h2>
+                <div class="grid md:grid-cols-3 gap-4 text-center">
+                    <div class="bg-dark-bg p-4 rounded-xl shadow-lg border-t-4 border-primary">
+                        <p class="text-3xl mb-2">📦</p>
+                        <h3 class="font-bold text-xl text-primary">Trazabilidad Total</h3>
+                        <p class="text-sm text-slate-400 mt-1">Registro inmutable de cada movimiento y estado del producto desde el origen hasta el consumidor final.</p>
+                    </div>
+                    <div class="bg-dark-bg p-4 rounded-xl shadow-lg border-t-4 border-primary">
+                        <p class="text-3xl mb-2">🤝</p>
+                        <h3 class="font-bold text-xl text-primary">Contratos Inteligentes</h3>
+                        <p class="text-sm text-slate-400 mt-1">Automatización de pagos y procesos de cumplimiento sin intermediarios, activados por eventos predefinidos (e.g., entrega).</p>
+                    </div>
+                    <div class="bg-dark-bg p-4 rounded-xl shadow-lg border-t-4 border-primary">
+                        <p class="text-3xl mb-2">🔒</p>
+                        <h3 class="font-bold text-xl text-primary">Confianza Cero</h3>
+                        <p class="text-sm text-slate-400 mt-1">La confianza se construye en la criptografía, eliminando la necesidad de confiar en un tercero central.</p>
+                    </div>
+                </div>
+
+                <div class="mt-6">
+                    <h3 class="text-2xl font-semibold text-secondary">Ejemplo de Uso: Lucha contra la Falsificación</h3>
+                    <p class="text-lg text-slate-300 mt-2">Al escanear un código, el consumidor puede verificar el historial completo e inmutable del producto en la cadena de bloques, garantizando su autenticidad.</p>
+                </div>
+            </section>
+
+            <!-- Diapositiva 5: Impacto y Beneficios -->
+            <section id="slide-5" class="slide hidden-slide space-y-6">
+                <h2 class="text-4xl font-bold text-secondary border-b border-secondary pb-2">
+                    4. Beneficios Clave del Proyecto
+                </h2>
+                <div class="grid md:grid-cols-2 gap-6 text-xl">
+                    <div class="flex items-start space-x-3">
+                        <span class="text-secondary text-2xl font-bold">✓</span>
+                        <div>
+                            <p class="font-semibold text-primary">Reducción de Costos</p>
+                            <p class="text-sm text-slate-400">Menos gastos administrativos, eliminación de intermediarios y optimización de inventario.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <span class="text-secondary text-2xl font-bold">✓</span>
+                        <div>
+                            <p class="font-semibold text-primary">Aumento de la Velocidad</p>
+                            <p class="text-sm text-slate-400">Cierre de transacciones y pagos casi instantáneos gracias a los Contratos Inteligentes.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <span class="text-secondary text-2xl font-bold">✓</span>
+                        <div>
+                            <p class="font-semibold text-primary">Mejora de la Reputación</p>
+                            <p class="text-sm text-slate-400">Demostración de responsabilidad social y sostenibilidad mediante la trazabilidad verificable.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <span class="text-secondary text-2xl font-bold">✓</span>
+                        <div>
+                            <p class="font-semibold text-primary">Mayor Resiliencia</p>
+                            <p class="text-sm text-slate-400">Capacidad de reaccionar rápidamente ante interrupciones o retiros de productos gracias a la visibilidad en tiempo real.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Diapositiva 6: Conclusión y Próximos Pasos -->
+            <section id="slide-6" class="slide hidden-slide space-y-6 flex flex-col justify-center h-full text-center">
+                <h2 class="text-5xl font-extrabold text-primary">
+                    El Futuro es Descentralizado
+                </h2>
+                <p class="text-2xl text-slate-300">
+                    Blockchain no es solo una tecnología, es un nuevo paradigma de confianza que transformará la logística global.
+                </p>
+                
+                <div class="mt-8 pt-4 border-t border-slate-700">
+                    <h3 class="text-3xl font-semibold text-secondary mb-3">Próximos Pasos:</h3>
+                    <ul class="space-y-2 text-lg text-slate-400">
+                        <li>Definir un caso de uso piloto (e.g., trazabilidad de un producto específico).</li>
+                        <li>Identificar los participantes clave de la red.</li>
+                        <li>Seleccionar la plataforma Blockchain adecuada (e.g., Hyperledger, Ethereum).</li>
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Barra de Navegación y Estado -->
+        <div class="flex justify-between items-center pt-4 border-t border-slate-700">
+            <button id="prev-btn" 
+                    class="px-4 py-2 bg-slate-600 text-white font-medium rounded-lg shadow-md hover:bg-slate-500 transition disabled:opacity-50 disabled:cursor-not-allowed" 
+                    disabled>
+                ← Anterior
+            </button>
+            
+            <div id="slide-indicator" class="text-lg font-medium text-slate-300">
+                Diapositiva 1 de 6
+            </div>
+
+            <button id="next-btn" 
+                    class="px-4 py-2 bg-primary text-white font-medium rounded-lg shadow-md hover:bg-indigo-500 transition">
+                Siguiente →
+            </button>
+        </div>
+    </div>
+
+    <!-- Script de Navegación -->
     <script>
-        function simularLogin() {
-            const mensaje = document.getElementById("mensaje");
-            mensaje.textContent = "Simulando inicio de sesión...";
-            setTimeout(() => {
-                mensaje.textContent = "¡Has iniciado sesión con éxito!";
-            }, 1500);
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const indicator = document.getElementById('slide-indicator');
+        let currentSlideIndex = 0;
+
+        // Función para actualizar la vista de la diapositiva
+        function updateSlideView() {
+            slides.forEach((slide, index) => {
+                const isCurrent = index === currentSlideIndex;
+                slide.classList.toggle('hidden-slide', !isCurrent);
+                slide.classList.toggle('opacity-100', isCurrent);
+                slide.classList.toggle('transform-none', isCurrent);
+                
+                // Asegurar que solo la diapositiva actual tenga altura completa
+                slide.style.height = isCurrent ? '100%' : 'auto'; 
+            });
+
+            // Actualizar botones y el indicador
+            prevBtn.disabled = currentSlideIndex === 0;
+            nextBtn.disabled = currentSlideIndex === slides.length - 1;
+            indicator.textContent = `Diapositiva ${currentSlideIndex + 1} de ${slides.length}`;
         }
+
+        // Manejador del botón Siguiente
+        nextBtn.addEventListener('click', () => {
+            if (currentSlideIndex < slides.length - 1) {
+                currentSlideIndex++;
+                updateSlideView();
+            }
+        });
+
+        // Manejador del botón Anterior
+        prevBtn.addEventListener('click', () => {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                updateSlideView();
+            }
+        });
+        
+        // Manejador de teclas de flecha
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowRight' && currentSlideIndex < slides.length - 1) {
+                event.preventDefault(); // Prevenir el desplazamiento de la página
+                nextBtn.click();
+            } else if (event.key === 'ArrowLeft' && currentSlideIndex > 0) {
+                event.preventDefault(); // Prevenir el desplazamiento de la página
+                prevBtn.click();
+            }
+        });
+
+
+        // Inicializar la vista
+        updateSlideView();
+        
     </script>
+
 </body>
 </html>
